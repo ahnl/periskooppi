@@ -1,0 +1,87 @@
+* { font-family: 'Arial'; }
+body { margin: 0; }
+
+
+.map {
+    height: 40vh;
+    width: 100%;
+}
+
+.app {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.toolbox, .result {
+    margin: 1rem;
+}
+
+.toolbox {
+    flex: 1;
+}
+
+.tabs ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.tabs ul li {
+    display: inline-block;
+    cursor: pointer;
+    border: 1px solid #888;
+    background-color: #eee; 
+    padding: 0.5rem;
+    border-bottom: none;
+    position: relative;
+}
+
+.tabs ul li.selected::after {
+    position: absolute;
+    content: '';
+    bottom: -3px;
+    border-bottom: 5px solid #eee;
+    width: 100%;
+    left: 0;
+    z-index: 3;
+}
+
+.tabContent {
+    border: 1px solid #888;
+    background-color: #eee; 
+    padding: 0.5rem;
+    width: calc(100% - 1rem);
+}
+
+button {
+    width: 100%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 1.5rem 0;
+}
+
+input[type=text] {
+    width: calc(100% - 0.6rem);
+    padding: 0.3rem;
+    font-size: 1rem;
+    
+}
+
+.tabContainer {
+    margin-bottom: 1rem;
+}
+
+#hereImage {
+    width: 100%;
+    max-width: 45vw;
+}
+
+@media only screen and (max-width: 910px) {
+    .app {
+        flex-direction: column;
+    }
+    #hereImage {
+        max-width: 100%;
+    }
+}

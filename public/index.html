@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/css/ol.css" type="text/css">
+    <link rel="stylesheet" href="main.css" />
+    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/build/ol.js"></script>
+    <title>Periskooppi</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <div class="app">
+        <div class="toolbox">
+            <h1>Periskooppi</h1>
+            <p>
+                Pinpoint [lat, long]- into [x, y]-coordinates on a live 360 panorama of the city of Lappeenranta. 
+            </p>
+            <p>
+                <a href="https://github.com/ahnl/periskooppi">This project is available on GitHub under an open-source license.</a>
+            </p>
+
+            <div class="tabContainer">
+                <div class="tabs">
+                    <ul>
+                        <li class="selected" id="positionTabBtn">Locate me</li>
+                        <li id="mapTabBtn">Pick location on map</li>
+                    </ul>
+                </div>
+                <div class="tabContent">
+                    <div id="positionTab">
+                        <button id="locateBtn">Locate me</button>
+                        <p>Naturally, this feature works best if you are located in the Lappeenranta. See <a href="#" id="openMapTabLink">pick location on map</a>-tab, if you are located further away.</p>
+                        <p>This feature will use Geolocation API provided by your browser. Make sure to allow the permission upon asking.</p>
+                    </div>
+                    <div id="mapTab" style="display: none;">
+                        <div id="map" class="map"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <p style="display: none;">
+                <b>Latitude, longitude: </b>
+                <input type="text" id="latlongInput" readonly>
+            </p>
+
+        </div>
+        <div class="result">
+            <img src="" id="hereImage">
+        </div>
+    </div>
+    
+    <script src="main.js"></script>
+</body>
+
+</html>

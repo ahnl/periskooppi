@@ -1,8 +1,9 @@
-import express from 'express';
 import fs from 'fs/promises';
+import express from 'express';
 import sharp from 'sharp';
 import cron from 'node-cron'
 import nocache from 'nocache';
+import path from 'path';
 
 import { prettyDate } from './utils.js';
 import { locate } from './locate.js';
@@ -11,10 +12,10 @@ import { updatePanorama } from './updatePanorama.js';
 cron.schedule('*/12 * * * *', updatePanorama);
 updatePanorama();
 
-const app = express();
-
 const panoramaFile = 'images/panorama.jpg';
 
+const app = express();
+app.use(express.static('public'));
 app.use(nocache());
 
 app.get("/here/:lat/:lon", async function(req, res){
@@ -32,7 +33,7 @@ app.get("/here/:lat/:lon", async function(req, res){
 
         await image.composite([
             {
-                input: 'images/point.png',
+                input: 'public/point.png',
                 top: pos[1] - 25,
                 left: (pos[0] - 25) - leftCrop
             },
