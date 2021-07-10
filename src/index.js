@@ -9,7 +9,7 @@ import { prettyDate } from './utils.js';
 import { locate } from './locate.js';
 
 import { updatePanorama } from './updatePanorama.js';
-cron.schedule('*/12 * * * *', updatePanorama);
+cron.schedule('*/4 * * * *', updatePanorama);
 updatePanorama();
 
 const panoramaFile = 'images/panorama.jpg';
