@@ -9,7 +9,7 @@ export async function updatePanorama() {
 
     const latestImage = data.images.find(item => item.id == data.last_image);
     const url = latestImage.structure.full.url_full;
-    const timestamp = new Date(latestImage.datetime * 1000 - (60 * 60 * 1000 * 3)); // -3 hours
+    const timestamp = new Date(latestImage.datetime * 1000);
     console.log(`Extracted image url ${url} with timestamp ${timestamp}`);
 
     const downloadPath = path.resolve('images', 'download.jpg');

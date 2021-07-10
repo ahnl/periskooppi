@@ -2,6 +2,7 @@ import express from 'express';
 import fs from 'fs/promises';
 import sharp from 'sharp';
 import cron from 'node-cron'
+import nocache from 'nocache';
 
 import { prettyDate } from './utils.js';
 import { locate } from './locate.js';
@@ -13,6 +14,8 @@ updatePanorama();
 const app = express();
 
 const panoramaFile = 'images/panorama.jpg';
+
+app.use(nocache());
 
 app.get("/here/:lat/:lon", async function(req, res){
     const location = [req.params.lat, req.params.lon];
@@ -56,4 +59,4 @@ app.get("/here/:lat/:lon", async function(req, res){
 });
 
 
-app.listen(8773);
+app.listen(80);
