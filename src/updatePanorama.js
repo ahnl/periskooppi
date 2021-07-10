@@ -11,7 +11,7 @@ export async function updatePanorama() {
         const tempPath = path.resolve('images', 'panorama_temp.jpg');
         const outputPath = path.resolve('images', 'panorama.jpg');
 
-        let latestTimestamp;
+        let latestTimestamp = new Date();
 
         try {
             const modified = fs.statSync(outputPath);
@@ -25,7 +25,8 @@ export async function updatePanorama() {
         const url = latestImage.structure.full2.url_full;
         const timestamp = new Date(latestImage.datetime * 1000);
         console.log(`Extracted image url ${url} with timestamp ${timestamp}`);
-
+        
+        console.log(`Comparing timestamps ${latestTimestamp} -> ${timestamp}`);
         if (timestamp.getTime() == latestTimestamp.getTime()) {
             console.log(`Timestamp matches the latest local download, aborting`);
             return;
