@@ -1,4 +1,4 @@
-# Where am I (Lappeenranta)
+# Periskooppi
 ![image](https://user-images.githubusercontent.com/46541386/125155763-a969d380-e16a-11eb-8be9-4a5a23c866ef.png)
 
 Pinpoint **[lat, long]**- into **[x, y]**-coordinates on live 360 panorama of the city of Lappeenranta.
