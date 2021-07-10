@@ -11,7 +11,7 @@ Pinpoint **[lat, long]**- into **[x, y]**-coordinates on live 360 panorama of th
 
 ### Locating position and creating an image
 - Request to `/here/:lat/:long`
-- Convert **[lat, long]** into **[x, y]** (see [src/locate.js](https://github.com/ahnl/whereami-lpr/blob/main/src/locate.js))
+- Convert **[lat, long]** into **[x, y]** (see [src/locate.js](https://github.com/ahnl/periskooppi/blob/main/src/locate.js))
   - Calculates distance and bearing between the given coordinates and the coordinates of Lappeenrannan Vesitorni (where the 360 panorama is taken)
   - The bearing translates easily into x-coordinate
   - The distance is used to determine the y-coordinate, by inserting it into a fitted curve's equation (because of the perspective)
@@ -27,20 +27,20 @@ Clone the repository onto your local machine and install the dependencies using 
 
 Run the app using `npm start`. It should be ready to go, once it has finished downloading the latest panorama image. The server starts on port 80.
 
-If you want to adapt this app to some other panorama imagery, you need to do some fiddling mostly with [src/locate.js](https://github.com/ahnl/whereami-lpr/blob/main/src/locate.js)'s values: center, zeroBearing, y-equation.
+If you want to adapt this app to some other panorama imagery, you need to do some fiddling mostly with [src/locate.js](https://github.com/ahnl/periskooppi/blob/main/src/locate.js)'s values: center, zeroBearing, y-equation.
 
 ### Docker
 
 Docker image is available in the GitHub Packages-registry. 
 
-- https://github.com/ahnl/whereami-lpr/pkgs/container/whereami-lpr
+- https://github.com/users/ahnl/packages/container/package/periskooppi
 
 Install it from the command line (make sure to log in first, with the **read:packages**-scope allowed):
 ```
-docker pull ghcr.io/ahnl/whereami-lpr:latest
+docker pull ghcr.io/ahnl/periskooppi:latest
 ```
 
 Run the image using:
 ```
-docker run -p 80:80 -d ghcr.io/ahnl/whereami-lpr
+docker run -p 80:80 -d ghcr.io/ahnl/periskooppi
 ```
