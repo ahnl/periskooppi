@@ -2,7 +2,7 @@ let iconFeature, map;
 let mapInitialized = false;
 
 let position;
-setPosition([61.062616, 28.198685]);
+setPosition([61.062616, 28.198685], true);
 
 function initMap() {
     if (mapInitialized) return;
@@ -71,10 +71,32 @@ locateBtn.addEventListener("click", () => {
     }
 });
 
-function setPosition(pos) {
+const hereImageDialog = document.querySelector('#hereImageDialog');
+const hereImageDialogLoading = document.querySelector('#hereImageDialogLoading');
+
+hereImageDialog.addEventListener("load", () => {
+    hereImageDialog.style.display = "block";
+    hereImageDialogLoading.style.display = "none";
+});
+
+function setPosition(pos, first = false) {
     position = pos;
     document.querySelector("#latlongInput").value = position.join(", ");
-    document.querySelector('#hereImage').src = `/here/${position[0]}/${position[1]}`;
+
+    if (window.innerWidth <= 910) {
+        if (!first) {
+            document.querySelector(".resultDialogWrapper").style.display = 'block';
+            hereImageDialog.style.display = "none";
+            hereImageDialogLoading.style.display = "block";
+
+            
+            hereImageDialog.src = `/here/${position[0]}/${position[1]}`;
+        }
+    } else {
+        document.querySelector('#hereImage').src = `/here/${position[0]}/${position[1]}`;
+    }
+    
+    
 
     let reversePos = [...position].reverse();
 
@@ -94,6 +116,10 @@ const tabs = {
 tabs.position.button.addEventListener("click", () => selectTab(tabs.position));
 tabs.map.button.addEventListener("click", () => selectTab(tabs.map));
 document.querySelector("#openMapTabLink").addEventListener("click", () => selectTab(tabs.map));
+
+document.querySelector("#closeResultDialogBtn").addEventListener("click", () => {
+    document.querySelector(".resultDialogWrapper").style.display = 'none';
+})
 
 function selectTab({ tab, button }) {
     Object.keys(tabs).forEach(tab => {
