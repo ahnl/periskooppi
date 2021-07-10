@@ -10,7 +10,7 @@ export function locate(target, panoramaSize) {
     const distance = getDistance(center, target);
 
     let x = (realBearing * ( panoramaSize[0] / 360)) % panoramaSize[0];
-    let y = panoramaSize[1] - (((-243.6 * Math.pow(10, -0.0008158 * distance ) + 191) * 4)); 
+    let y = panoramaSize[1] - (((-243.6 * Math.pow(10, -0.0008158 * distance ) + 191) * 4 * 2)); 
 
     x = Math.floor(x);
     y = Math.floor(y);

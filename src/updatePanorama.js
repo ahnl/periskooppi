@@ -8,7 +8,7 @@ export async function updatePanorama() {
     const {data} = await axios.get('https://skyviewlive.roundshot.co/lappeenranta/structure.json');
 
     const latestImage = data.images.find(item => item.id == data.last_image);
-    const url = latestImage.structure.full.url_full;
+    const url = latestImage.structure.full2.url_full;
     const timestamp = new Date(latestImage.datetime * 1000);
     console.log(`Extracted image url ${url} with timestamp ${timestamp}`);
 

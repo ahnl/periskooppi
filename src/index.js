@@ -18,44 +18,49 @@ const panoramaFile = 'images/panorama.jpg';
 app.use(nocache());
 
 app.get("/here/:lat/:lon", async function(req, res){
-    const location = [req.params.lat, req.params.lon];
+    try {
+        const location = [req.params.lat, req.params.lon];
+        console.log(location)
+        let image = await sharp(panoramaFile);
+        const metadata = await image.metadata();
 
-    let image = await sharp(panoramaFile);
-    const metadata = await image.metadata();
+        const panoramaSize = [metadata.width, metadata.height];
 
-    const panoramaSize = [metadata.width, metadata.height];
+        const pos = locate(location, panoramaSize);
 
-    const pos = locate(location, panoramaSize);
+        const leftCrop = Math.max(Math.min(pos[0] - ( panoramaSize[1] / 2), panoramaSize[0] - panoramaSize[1]), 0);
 
-    const leftCrop = Math.max(Math.min(pos[0] - ( panoramaSize[1] / 2), panoramaSize[0] - panoramaSize[1]), 0);
+        await image.composite([
+            {
+                input: 'images/point.png',
+                top: pos[1] - 25,
+                left: (pos[0] - 25) - leftCrop
+            },
+            ...(req.query?.['noTime'] !== '' ? 
+            [{
+                input: Buffer.from(`<svg height="100" width="860"> <text x="30" y="50" font-size="30" fill="#fff" font-family="Arial, Ubuntu">${prettyDate((await fs.stat(panoramaFile)).mtime)}</text> </svg>`),
+                top: 0,
+                left: 0
+            }] 
+            : [])
+        ])
 
-    await image.composite([
-        {
-            input: 'images/point.png',
-            top: pos[1] - 25,
-            left: (pos[0] - 25) - leftCrop
-        },
-        ...(req.query?.['noTime'] !== '' ? 
-        [{
-            input: Buffer.from(`<svg height="100" width="860"> <text x="30" y="50" font-size="30" fill="#fff" font-family="Arial, Ubuntu">${prettyDate((await fs.stat(panoramaFile)).mtime)}</text> </svg>`),
+        await image.resize({ width: panoramaSize[0] })
+
+        await image.extract({
+            width: panoramaSize[1],
+            height: panoramaSize[1],
             top: 0,
-            left: 0
-        }] 
-        : [])
-    ])
+            left: leftCrop
+        });
 
-    await image.resize({ width: panoramaSize[0] })
-
-    await image.extract({
-        width: panoramaSize[1],
-        height: panoramaSize[1],
-        top: 0,
-        left: leftCrop
-    });
-
-    const buffer = await image.toBuffer();
-    res.set("Content-Type", "image/jpeg");
-    res.send(buffer);
+        const buffer = await image.toBuffer();
+        res.set("Content-Type", "image/jpeg");
+        res.send(buffer);
+    } catch (e) {
+        console.error(e.message);
+        res.end();
+    }
 });
 
 
