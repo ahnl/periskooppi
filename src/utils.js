@@ -37,5 +37,6 @@ export function getDistance(start, dest) {
 }
 
 export function prettyDate(date) {
+    date = new Date(date.getTime() + (date.getTimezoneOffset() * 1000 * 60))
     return `${date.getHours().toString().padStart(2, "0")}:${date.getMinutes().toString().padStart(2, "0")}`
 }
