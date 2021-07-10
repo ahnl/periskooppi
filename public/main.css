@@ -96,15 +96,15 @@ input[type=text] {
     top: 0; left: 0;
     width: 100%; height: 100%;
 
-    background-color:rgba(0,0,0,0.8);
+    background-color:rgba(0,0,0,0.9);
     z-index: 10;
 }
 
 .resultDialog {
-    margin: 2rem;
+    margin: 1rem;
     display: flex;
     flex-direction: column;
-    height: calc(100% - 4rem);
+    height: calc(100% - 2rem);
 }
 
 @media only screen and (max-width: 910px) {
