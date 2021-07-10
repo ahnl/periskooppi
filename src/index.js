@@ -35,7 +35,7 @@ app.get("/here/:lat/:lon", async function(req, res){
             top: pos[1] - 25,
             left: (pos[0] - 25) - leftCrop
         },
-        ...(req.query?.['noDate'] !== '' ? 
+        ...(req.query?.['noTime'] !== '' ? 
         [{
             input: Buffer.from(`<svg height="100" width="860"> <text x="30" y="50" font-size="30" fill="#fff" font-family="Arial, Ubuntu">${prettyDate((await fs.stat(panoramaFile)).mtime)}</text> </svg>`),
             top: 0,
