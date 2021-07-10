@@ -31,7 +31,7 @@ If you want to adapt this app to some other panorama imagery, you need to do som
 
 ### Docker
 
-Docker package is available in the GitHub Packages-registry. 
+Docker image is available in the GitHub Packages-registry. 
 
 - https://github.com/ahnl/whereami-lpr/pkgs/container/whereami-lpr
 
